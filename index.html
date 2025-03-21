@@ -6,145 +6,107 @@
     <title>Ucapan Terima Kasih</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            font-family: "Courier New", monospace;
+            background-color: #111;
+            color: white;
             text-align: center;
             margin: 0;
             padding: 0;
         }
-
         .status-bar {
-            background: linear-gradient(90deg, #ff0000, #6600ff);
+            background: #222;
             padding: 10px;
             font-size: 14px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
-            color: white;
+            border-bottom: 3px solid cyan;
         }
-
         .content {
-            margin: 80px auto 20px;
-            padding: 20px;
-            background: rgba(30, 30, 30, 0.9);
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            border: 2px solid #ff0000;
-            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
-        }
-
-        h1 {
-            color: red;
-            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
-        }
-
-        .video-wrapper {
-            width: 80%;
             margin: 20px auto;
-            border: 3px solid #6600ff;
+            padding: 20px;
+            background: #222;
+            border: 3px solid red;
             border-radius: 10px;
-            padding: 10px;
-            background: rgba(50, 50, 50, 0.9);
-            box-shadow: 0px 0px 10px rgba(102, 0, 255, 0.8);
+            box-shadow: 0 0 15px red;
+            width: 90%;
+            max-width: 500px;
         }
-
-        iframe {
-            width: 100%;
-            height: 300px;
-            border-radius: 10px;
-            border: none;
-        }
-
         .bio {
             margin-top: 20px;
-            padding: 10px;
-            background: rgba(50, 50, 50, 0.9);
+            padding: 15px;
+            background: #333;
+            border: 3px solid cyan;
             border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            border: 2px solid cyan;
-            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 15px cyan;
         }
-
-        .bio a {
-            color: cyan;
-            text-decoration: none;
+        iframe {
+            width: 90%;
+            max-width: 500px;
+            height: 200px;
+            margin-top: 20px;
+            border: 3px solid purple;
+            box-shadow: 0 0 15px purple;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Status Bar -->
     <div class="status-bar">
-        <span id="date-time"></span>
-        <span id="battery-status"></span>
+        <span id="date-time">Memuat...</span>
+        <span id="battery-status">Baterai: Memuat...</span>
     </div>
 
+    <!-- Ucapan Terima Kasih -->
     <div class="content">
-        <h1>MAAF DAN TERIMA KASIH</h1>
+        <h2 style="color: red;">MAAF DAN TERIMA KASIH</h2>
         <p>Ada banyak hal yang ingin kukatakan, tapi semua terasa hampa...</p>
         <p>Aku ingin tertawa bersamamu sekali lagi, tapi waktu berkata tidak.</p>
         <p>Terima kasih untuk setiap momen yang pernah kita bagi.</p>
         <p>Untuk senyuman yang pernah kau berikan...</p>
         <p>Untuk kenangan yang kini menjadi bagian dari hatiku...</p>
-        <p>Selamanya...</p>
-        <h2 id="time"></h2>
+        <p><strong>Selamanya...</strong></p>
     </div>
 
-    <div class="video-wrapper">
-        <iframe id="videoHujan" src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
-    </div>
+    <!-- Video YouTube (Lagu dan Hujan) -->
+    <iframe src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&playlist=geBosN5U-hE" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&playlist=_T7EnG50BMI" allowfullscreen></iframe>
 
-    <div class="video-wrapper">
-        <iframe id="videoLagu" src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
-    </div>
-
+    <!-- Bio -->
     <div class="bio">
         <h3>Penulis: Akbar</h3>
-        <p>Instagram: <a href="https://instagram.com/dash1.id">@dash1.id</a> | <a href="https://instagram.com/mletre_g4nk">@mletre_g4nk</a></p>
-        <p>WhatsApp: <a href="tel:087825946251">0878-2594-6251</a></p>
-        <p>Facebook: <a href="https://facebook.com/BarzxSta">Barzx Sta</a></p>
+        <p>Instagram: <a href="https://instagram.com/dash1.id" target="_blank">@dash1.id</a> | <a href="https://instagram.com/mletre_g4nk" target="_blank">@mletre_g4nk</a></p>
+        <p>WhatsApp: <a href="https://wa.me/6287825946251" target="_blank">0878-2594-6251</a></p>
+        <p>Facebook: <a href="https://facebook.com/BarzxSta" target="_blank">Barzx Sta</a></p>
     </div>
 
     <script>
-        function updateTime() {
+        // Update Waktu dan Tanggal
+        function updateDateTime() {
             const now = new Date();
-            let year = now.getFullYear();
-            let month = now.toLocaleString('id-ID', { month: 'long' });
-            let day = now.toLocaleString('id-ID', { weekday: 'long' });
-            let date = now.getDate();
-            let hours = now.getHours().toString().padStart(2, '0');
-            let minutes = now.getMinutes().toString().padStart(2, '0');
-            let seconds = now.getSeconds().toString().padStart(2, '0');
-            
-            document.getElementById('date-time').textContent = `${day}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
-            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date-time').innerText = now.toLocaleDateString('id-ID', options) + " | " + now.toLocaleTimeString();
         }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
 
-        setInterval(updateTime, 1000);
-        updateTime();
-
+        // Update Status Baterai
         function updateBatteryStatus() {
             navigator.getBattery().then(battery => {
                 function update() {
-                    let level = Math.round(battery.level * 100);
-                    let charging = battery.charging ? "⚡ Mengisi Daya" : "🔋 Tidak Mengisi";
-                    document.getElementById('battery-status').textContent = `${charging} | ${level}%`;
+                    const level = Math.round(battery.level * 100) + "%";
+                    const charging = battery.charging ? "Mengisi 🔌" : "Tidak Mengisi ⚡";
+                    document.getElementById('battery-status').innerText = `Baterai: ${level} | ${charging}`;
                 }
                 update();
                 battery.addEventListener('chargingchange', update);
                 battery.addEventListener('levelchange', update);
             });
         }
-
         updateBatteryStatus();
     </script>
 
 </body>
-    </html>
+</html>
