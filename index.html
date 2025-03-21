@@ -1,1 +1,193 @@
-# anjay
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaf dan Terima Kasih</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0f0f0f, #000000);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://media.giphy.com/media/l0HlRnAW0NTMfc9uY/giphy.gif') repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .status-bar {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            font-weight: bold;
+            font-size: 14px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1s ease-in-out;
+            backdrop-filter: blur(2px);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff4b5c;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .biografi {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .biografi h2 {
+            font-size: 24px;
+            color: #ffcc29;
+            margin-bottom: 10px;
+        }
+
+        .biografi p {
+            font-size: 16px;
+        }
+
+        .music-player {
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .fading-text {
+            animation: fadeText 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes fadeText {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="rain"></div>
+
+    <audio autoplay loop>
+        <source src="https://www.soundjay.com/nature/rain-01.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="status-bar" id="status-bar">
+        Memuat status...
+    </div>
+
+    <div class="container">
+        <h1>MAAF DAN TERIMA KASIH</h1>
+        <p>Ada banyak hal yang ingin kukatakan...</p>
+        <p>Namun, kata-kata terasa begitu hampa saat kau tidak lagi di sini.</p>
+        <p>Terima kasih... untuk semua waktu yang pernah kita habiskan bersama.</p>
+        <p>Setiap tawa, setiap pelukan, setiap tatapan yang kini hanya menjadi kenangan.</p>
+        <p class="fading-text">Maaf... jika aku tidak cukup baik untukmu.</p>
+        <p>Jika takdir membawa kita menjauh, ingatlah... aku tetap di sini, dengan kenangan yang masih kusimpan erat.</p>
+        <p class="fading-text">Selamat tinggal... atau mungkin hanya sampai nanti.</p>
+    </div>
+
+    <div class="biografi">
+        <h2>Tentang Penulis</h2>
+        <p><strong>Nama:</strong> Akbar</p>
+        <p><strong>Instagram:</strong> @dash1.id & @mletre_g4nk</p>
+        <p><strong>WhatsApp:</strong> +62 878-2594-6251</p>
+        <p><strong>Facebook:</strong> Barzx Sta</p>
+    </div>
+
+    <div class="music-player">
+        <h2>🎵 Untukmu, yang kini hanya kenangan 🎵</h2>
+        <iframe id="yt-player" width="560" height="315" 
+                src="https://www.youtube.com/embed/UTg_Cw9LxDQ?autoplay=1&loop=1&playlist=UTg_Cw9LxDQ" 
+                allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+    </div>
+
+    <script>
+        function updateStatusBar() {
+            let now = new Date();
+            let days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            let months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+            let day = days[now.getDay()];
+            let date = now.getDate();
+            let month = months[now.getMonth()];
+            let year = now.getFullYear();
+            let hours = now.getHours();
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+
+            let batteryStatus = navigator.getBattery ? navigator.getBattery().then(battery => {
+                let chargeStatus = battery.charging ? "Mengisi Daya ⚡" : "Tidak Mengisi 🔋";
+                document.getElementById("status-bar").innerHTML =
+                    `Tanggal: ${day}, ${date} ${month} ${year} | Waktu: ${hours}:${minutes} | ` +
+                    `Baterai: ${Math.round(battery.level * 100)}% | Status: ${chargeStatus}`;
+            }) : "Baterai tidak tersedia";
+
+            document.getElementById("status-bar").innerHTML =
+                `Tanggal: ${day}, ${date} ${month} ${year} | Waktu: ${hours}:${minutes} | ` +
+                `Baterai: Mengambil data...`;
+        }
+
+        setInterval(updateStatusBar, 1000);
+        updateStatusBar();
+    </script>
+
+</body>
+  </html>
