@@ -15,32 +15,44 @@
         }
 
         .status-bar {
-            background: rgba(30, 30, 30, 0.9);
+            background: linear-gradient(90deg, #ff0000, #6600ff);
             padding: 10px;
             font-size: 14px;
-            border-bottom: 2px solid red;
             width: 100%;
             position: fixed;
             top: 0;
             left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: white;
         }
 
         .content {
-            margin: 60px auto 20px;
+            margin: 80px auto 20px;
             padding: 20px;
-            background: rgba(30, 30, 30, 0.8);
+            background: rgba(30, 30, 30, 0.9);
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
+            border: 2px solid #ff0000;
+            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
         }
 
         h1 {
             color: red;
+            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
         }
 
         .video-wrapper {
             width: 80%;
             margin: 20px auto;
+            border: 3px solid #6600ff;
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(50, 50, 50, 0.9);
+            box-shadow: 0px 0px 10px rgba(102, 0, 255, 0.8);
         }
 
         iframe {
@@ -53,11 +65,12 @@
         .bio {
             margin-top: 20px;
             padding: 10px;
-            background: rgba(50, 50, 50, 0.8);
+            background: rgba(50, 50, 50, 0.9);
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
-            margin: auto;
+            border: 2px solid cyan;
+            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
         }
 
         .bio a {
@@ -70,6 +83,7 @@
 
     <div class="status-bar">
         <span id="date-time"></span>
+        <span id="battery-status"></span>
     </div>
 
     <div class="content">
@@ -115,7 +129,22 @@
 
         setInterval(updateTime, 1000);
         updateTime();
+
+        function updateBatteryStatus() {
+            navigator.getBattery().then(battery => {
+                function update() {
+                    let level = Math.round(battery.level * 100);
+                    let charging = battery.charging ? "⚡ Mengisi Daya" : "🔋 Tidak Mengisi";
+                    document.getElementById('battery-status').textContent = `${charging} | ${level}%`;
+                }
+                update();
+                battery.addEventListener('chargingchange', update);
+                battery.addEventListener('levelchange', update);
+            });
+        }
+
+        updateBatteryStatus();
     </script>
 
 </body>
-</html>
+    </html>
