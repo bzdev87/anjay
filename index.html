@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maaf & Terima Kasih</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            color: white;
+            font-family: 'Quicksand', sans-serif;
         }
         body {
             background: black;
             text-align: center;
-            overflow: hidden;
+            overflow-y: auto; /* Memperbaiki agar bisa di-scroll */
+            color: white;
+            height: 100vh;
         }
         video {
             position: fixed;
@@ -25,54 +28,83 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            filter: brightness(50%) contrast(120%);
         }
         .overlay {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             z-index: -1;
         }
         .status-bar {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 14px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             z-index: 10;
+            font-weight: bold;
         }
         .content {
             position: relative;
             z-index: 2;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.9);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             width: 85%;
             max-width: 600px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            margin: 80px auto 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            margin: 100px auto 20px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            animation: fadeIn 1s ease-in-out;
+            min-height: 100vh; /* Menyesuaikan tinggi agar tidak tertutup */
         }
         h1 {
-            color: red;
-            font-size: 26px;
+            font-size: 30px;
             margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 71, 71, 0.7);
         }
         p {
             font-size: 16px;
             margin-bottom: 15px;
             line-height: 1.8;
+            opacity: 0.9;
         }
         .biografi {
             margin-top: 30px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
         }
         .biografi h2 {
-            color: lightgray;
             margin-bottom: 10px;
+            color: #ffcccc;
+            text-shadow: 0 0 8px rgba(255, 100, 100, 0.8);
+        }
+        a {
+            color: #ffaaaa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -86,9 +118,7 @@
     <div class="overlay"></div>
 
     <!-- **Status Bar (Waktu, Baterai, Pengisian Daya)** -->
-    <div class="status-bar" id="statusBar">
-        Memuat...
-    </div>
+    <div class="status-bar" id="statusBar">Memuat...</div>
 
     <!-- **Konten Utama** -->
     <div class="content">
@@ -107,37 +137,29 @@
     <div class="biografi">
         <h2>Tentang Penulis</h2>
         <p><strong>Nama:</strong> Akbar</p>
-        <p><strong>Instagram:</strong> @dash1.id & @mletre_g4nk</p>
-        <p><strong>WhatsApp:</strong> +62 878-2594-6251</p>
-        <p><strong>Facebook:</strong> Barzx Sta</p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/dash1.id" target="_blank">@dash1.id</a> & <a href="https://instagram.com/mletre_g4nk" target="_blank">@mletre_g4nk</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/6287825946251" target="_blank">+62 878-2594-6251</a></p>
+        <p><strong>Facebook:</strong> <a href="https://facebook.com/barzxsta" target="_blank">Barzx Sta</a></p>
     </div>
 
     <script>
-        // **Fungsi Update Status Bar dengan Detik**
         function updateStatusBar() {
             let date = new Date();
-            let dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            let monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            let days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            let months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-            let day = dayNames[date.getDay()];
+            let day = days[date.getDay()];
             let dayNum = date.getDate();
-            let month = monthNames[date.getMonth()];
+            let month = months[date.getMonth()];
             let year = date.getFullYear();
             let hours = date.getHours().toString().padStart(2, '0');
             let minutes = date.getMinutes().toString().padStart(2, '0');
             let seconds = date.getSeconds().toString().padStart(2, '0');
 
-            if (navigator.getBattery) {
-                navigator.getBattery().then(function(battery) {
-                    let chargeStatus = battery.charging ? "Mengisi Daya ⚡" : "Tidak Mengisi ❌";
-                    document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds} | 🔋 ${Math.round(battery.level * 100)}% | ${chargeStatus}`;
-                });
-            } else {
-                document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds} | 🔋 Status Baterai Tidak Tersedia`;
-            }
+            document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds}`;
         }
         setInterval(updateStatusBar, 1000);
     </script>
 
 </body>
-</html>
+        </html>
