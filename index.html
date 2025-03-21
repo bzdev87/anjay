@@ -5,145 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maaf & Terima Kasih</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            color: white;
         }
         body {
             background: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            overflow-y: auto;
-            color: white;
             height: 100vh;
+            overflow: hidden;
         }
-        /* Background YouTube */
-        .video-container {
+        #video-hujan, #video-lagu {
+            width: 100%;
+            height: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            object-fit: cover;
             z-index: -1;
-            overflow: hidden;
-        }
-        .video-container iframe {
-            width: 100vw;
-            height: 100vh;
         }
         .overlay {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-        .status-bar {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            z-index: 10;
-            font-weight: bold;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
         }
         .content {
             position: relative;
             z-index: 2;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
             width: 85%;
             max-width: 600px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            margin: 100px auto 20px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            animation: fadeIn 1s ease-in-out;
-            min-height: 100vh;
-        }
-        h1 {
-            font-size: 30px;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255, 71, 71, 0.7);
-        }
-        p {
-            font-size: 16px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 2s ease-in-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        h1 {
+            color: red;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .time {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: cyan;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .bio {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
 
-    <!-- **Background YouTube Video** -->
-    <div class="video-container">
-        <iframe id="ytPlayer" width="560" height="315" 
-            src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&playlist=geBosN5U-hE&controls=1&showinfo=0&modestbranding=1" 
-            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
-    </div>
+    <!-- Video Hujan -->
+    <iframe id="video-hujan" src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&controls=0&mute=1&playlist=geBosN5U-hE" frameborder="0"></iframe>
+
+    <!-- Video Lagu -->
+    <iframe id="video-lagu" src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&controls=0&playlist=_T7EnG50BMI" frameborder="0"></iframe>
 
     <div class="overlay"></div>
 
-    <!-- **Status Bar (Waktu & Detik)** -->
-    <div class="status-bar" id="statusBar">Memuat...</div>
-
-    <!-- **Konten Utama** -->
     <div class="content">
         <h1>MAAF DAN TERIMA KASIH</h1>
         <p>Ada banyak hal yang ingin kukatakan, tapi semua terasa hampa...</p>
         <p>Aku ingin tertawa bersamamu sekali lagi, tapi waktu berkata tidak.</p>
         <p>Terima kasih untuk setiap momen yang pernah kita bagi.</p>
         <p>Untuk senyuman yang pernah kau berikan...</p>
-        <p>Untuk pelukan yang pernah menghangatkanku...</p>
-        <p>Untuk tatapan yang dulu membuatku merasa berarti...</p>
+        <p>Untuk kehangatan yang dulu membuatku merasa berarti...</p>
+        <p>Untuk tatapan yang pernah menenangkan hatiku...</p>
         <p>Sekarang semuanya hanya menjadi kenangan,  
            yang akan kusimpan di dalam hati... selamanya.</p>
+
+        <div class="time" id="clock"></div>
+
+        <div class="controls">
+            <div class="button" onclick="toggleVideo('video-hujan')">🔊 Hujan</div>
+            <div class="button" onclick="toggleVideo('video-lagu')">🎵 Musik</div>
+        </div>
+
+        <div class="bio">
+            <p><strong>Penulis:</strong> Akbar</p>
+            <p>Instagram: <a href="https://www.instagram.com/dash1.id" target="_blank">@dash1.id</a> | 
+                         <a href="https://www.instagram.com/mletre_g4nk" target="_blank">@mletre_g4nk</a></p>
+            <p>WhatsApp: <a href="https://wa.me/6287825946251" target="_blank">0878-2594-6251</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/BarzxSta" target="_blank">Barzx Sta</a></p>
+        </div>
     </div>
 
     <script>
-        function updateStatusBar() {
-            let date = new Date();
-            let days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            let months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-
-            let day = days[date.getDay()];
-            let dayNum = date.getDate();
-            let month = months[date.getMonth()];
-            let year = date.getFullYear();
-
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-            let seconds = date.getSeconds();
-
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            let timeString = `${day}, ${dayNum} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
-            document.getElementById("statusBar").innerText = timeString;
+        function toggleVideo(id) {
+            let iframe = document.getElementById(id);
+            let src = iframe.src;
+            if (src.includes("autoplay=1")) {
+                iframe.src = src.replace("autoplay=1", "autoplay=0");
+            } else {
+                iframe.src = src.replace("autoplay=0", "autoplay=1");
+            }
         }
 
-        setInterval(updateStatusBar, 1000);
-        updateStatusBar();
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 
 </body>
-    </html>
+</html>
