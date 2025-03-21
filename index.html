@@ -16,19 +16,23 @@
         body {
             background: black;
             text-align: center;
-            overflow-y: auto; /* Memperbaiki agar bisa di-scroll */
+            overflow-y: auto;
             color: white;
             height: 100vh;
         }
-        video {
+        /* Background YouTube */
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
-            filter: brightness(50%) contrast(120%);
+            overflow: hidden;
+        }
+        .video-container iframe {
+            width: 100vw;
+            height: 100vh;
         }
         .overlay {
             position: fixed;
@@ -64,7 +68,7 @@
             margin: 100px auto 20px;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
             animation: fadeIn 1s ease-in-out;
-            min-height: 100vh; /* Menyesuaikan tinggi agar tidak tertutup */
+            min-height: 100vh;
         }
         h1 {
             font-size: 30px;
@@ -80,28 +84,6 @@
             line-height: 1.8;
             opacity: 0.9;
         }
-        .biografi {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            animation: fadeIn 1.5s ease-in-out;
-        }
-        .biografi h2 {
-            margin-bottom: 10px;
-            color: #ffcccc;
-            text-shadow: 0 0 8px rgba(255, 100, 100, 0.8);
-        }
-        a {
-            color: #ffaaaa;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -110,14 +92,17 @@
 </head>
 <body>
 
-    <!-- **Video Background** -->
-    <video autoplay loop muted>
-        <source src="https://player.vimeo.com/external/385374761.sd.mp4?s=cf1df4b38f17b3d65cdd1a1a9f82f502597b95cd&profile_id=164" type="video/mp4">
-    </video>
+    <!-- **Background YouTube Video** -->
+    <div class="video-container">
+        <iframe id="ytPlayer" width="560" height="315" 
+            src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&playlist=geBosN5U-hE&controls=1&showinfo=0&modestbranding=1" 
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+    </div>
 
     <div class="overlay"></div>
 
-    <!-- **Status Bar (Waktu, Baterai, Pengisian Daya)** -->
+    <!-- **Status Bar (Waktu & Detik)** -->
     <div class="status-bar" id="statusBar">Memuat...</div>
 
     <!-- **Konten Utama** -->
@@ -133,15 +118,6 @@
            yang akan kusimpan di dalam hati... selamanya.</p>
     </div>
 
-    <!-- **Biografi** -->
-    <div class="biografi">
-        <h2>Tentang Penulis</h2>
-        <p><strong>Nama:</strong> Akbar</p>
-        <p><strong>Instagram:</strong> <a href="https://instagram.com/dash1.id" target="_blank">@dash1.id</a> & <a href="https://instagram.com/mletre_g4nk" target="_blank">@mletre_g4nk</a></p>
-        <p><strong>WhatsApp:</strong> <a href="https://wa.me/6287825946251" target="_blank">+62 878-2594-6251</a></p>
-        <p><strong>Facebook:</strong> <a href="https://facebook.com/barzxsta" target="_blank">Barzx Sta</a></p>
-    </div>
-
     <script>
         function updateStatusBar() {
             let date = new Date();
@@ -152,14 +128,22 @@
             let dayNum = date.getDate();
             let month = months[date.getMonth()];
             let year = date.getFullYear();
-            let hours = date.getHours().toString().padStart(2, '0');
-            let minutes = date.getMinutes().toString().padStart(2, '0');
-            let seconds = date.getSeconds().toString().padStart(2, '0');
 
-            document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds}`;
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            let timeString = `${day}, ${dayNum} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+            document.getElementById("statusBar").innerText = timeString;
         }
+
         setInterval(updateStatusBar, 1000);
+        updateStatusBar();
     </script>
 
 </body>
-        </html>
+    </html>
