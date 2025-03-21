@@ -14,20 +14,19 @@
             padding: 0;
         }
 
-        .video-wrapper {
-            width: 60%;
-            margin: 10px auto;
-        }
-
-        iframe {
+        .status-bar {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 10px;
+            font-size: 14px;
+            border-bottom: 2px solid red;
             width: 100%;
-            height: 300px;
-            border-radius: 10px;
-            border: none;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .content {
-            margin: 20px auto;
+            margin: 60px auto 20px;
             padding: 20px;
             background: rgba(30, 30, 30, 0.8);
             border-radius: 10px;
@@ -39,8 +38,16 @@
             color: red;
         }
 
-        h2 {
-            font-size: 24px;
+        .video-wrapper {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            border: none;
         }
 
         .bio {
@@ -61,12 +68,8 @@
 </head>
 <body>
 
-    <div class="video-wrapper">
-        <iframe id="videoHujan" src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
-    </div>
-
-    <div class="video-wrapper">
-        <iframe id="videoLagu" src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
+    <div class="status-bar">
+        <span id="date-time"></span>
     </div>
 
     <div class="content">
@@ -80,6 +83,14 @@
         <h2 id="time"></h2>
     </div>
 
+    <div class="video-wrapper">
+        <iframe id="videoHujan" src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
+    </div>
+
+    <div class="video-wrapper">
+        <iframe id="videoLagu" src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&controls=1" allowfullscreen></iframe>
+    </div>
+
     <div class="bio">
         <h3>Penulis: Akbar</h3>
         <p>Instagram: <a href="https://instagram.com/dash1.id">@dash1.id</a> | <a href="https://instagram.com/mletre_g4nk">@mletre_g4nk</a></p>
@@ -90,11 +101,18 @@
     <script>
         function updateTime() {
             const now = new Date();
+            let year = now.getFullYear();
+            let month = now.toLocaleString('id-ID', { month: 'long' });
+            let day = now.toLocaleString('id-ID', { weekday: 'long' });
+            let date = now.getDate();
             let hours = now.getHours().toString().padStart(2, '0');
             let minutes = now.getMinutes().toString().padStart(2, '0');
             let seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('date-time').textContent = `${day}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
             document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
         }
+
         setInterval(updateTime, 1000);
         updateTime();
     </script>
