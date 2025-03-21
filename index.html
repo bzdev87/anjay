@@ -15,7 +15,7 @@
         body {
             background: black;
             text-align: center;
-            overflow-y: auto;
+            overflow: hidden;
         }
         video {
             position: fixed;
@@ -25,13 +25,12 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            opacity: 0.5;
         }
         .overlay {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             z-index: -1;
         }
         .status-bar {
@@ -64,19 +63,6 @@
             margin-bottom: 15px;
             line-height: 1.8;
         }
-        .audio-controls {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .audio-button {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 12px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
         .biografi {
             margin-top: 30px;
             padding: 20px;
@@ -87,9 +73,6 @@
         .biografi h2 {
             color: lightgray;
             margin-bottom: 10px;
-        }
-        iframe {
-            display: none;
         }
     </style>
 </head>
@@ -114,15 +97,10 @@
         <p>Aku ingin tertawa bersamamu sekali lagi, tapi waktu berkata tidak.</p>
         <p>Terima kasih untuk setiap momen yang pernah kita bagi.</p>
         <p>Untuk senyuman yang pernah kau berikan...</p>
-        <p>Untuk kebersamaan kita yg pernah ada</p>
+        <p>Untuk pelukan yang pernah menghangatkanku...</p>
         <p>Untuk tatapan yang dulu membuatku merasa berarti...</p>
         <p>Sekarang semuanya hanya menjadi kenangan,  
            yang akan kusimpan di dalam hati... selamanya.</p>
-        
-        <div class="audio-controls">
-            <div class="audio-button" onclick="toggleAudio('hujan')">🌧️ Suara Hujan</div>
-            <div class="audio-button" onclick="toggleAudio('musik')">🎵 Musik Galau</div>
-        </div>
     </div>
 
     <!-- **Biografi** -->
@@ -134,26 +112,8 @@
         <p><strong>Facebook:</strong> Barzx Sta</p>
     </div>
 
-    <!-- **YouTube Audio (disembunyikan)** -->
-    <iframe id="hujan" width="0" height="0" src="https://www.youtube.com/embed/_T7EnG50BMI?autoplay=1&loop=1&playlist=_T7EnG50BMI" frameborder="0" allow="autoplay"></iframe>
-    <iframe id="musik" width="0" height="0" src="https://www.youtube.com/embed/geBosN5U-hE?autoplay=1&loop=1&playlist=geBosN5U-hE" frameborder="0" allow="autoplay"></iframe>
-
     <script>
-        let hujanPlaying = false;
-        let musikPlaying = false;
-
-        function toggleAudio(id) {
-            let iframe = document.getElementById(id);
-            if (id === "hujan") {
-                hujanPlaying = !hujanPlaying;
-                iframe.style.display = hujanPlaying ? "block" : "none";
-            } else if (id === "musik") {
-                musikPlaying = !musikPlaying;
-                iframe.style.display = musikPlaying ? "block" : "none";
-            }
-        }
-
-        // **Fungsi Update Status Bar**
+        // **Fungsi Update Status Bar dengan Detik**
         function updateStatusBar() {
             let date = new Date();
             let dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
@@ -165,18 +125,19 @@
             let year = date.getFullYear();
             let hours = date.getHours().toString().padStart(2, '0');
             let minutes = date.getMinutes().toString().padStart(2, '0');
+            let seconds = date.getSeconds().toString().padStart(2, '0');
 
             if (navigator.getBattery) {
                 navigator.getBattery().then(function(battery) {
                     let chargeStatus = battery.charging ? "Mengisi Daya ⚡" : "Tidak Mengisi ❌";
-                    document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes} | 🔋 ${Math.round(battery.level * 100)}% | ${chargeStatus}`;
+                    document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds} | 🔋 ${Math.round(battery.level * 100)}% | ${chargeStatus}`;
                 });
             } else {
-                document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes} | 🔋 Status Baterai Tidak Tersedia`;
+                document.getElementById("statusBar").innerHTML = `📅 ${day}, ${dayNum} ${month} ${year} | 🕒 ${hours}:${minutes}:${seconds} | 🔋 Status Baterai Tidak Tersedia`;
             }
         }
         setInterval(updateStatusBar, 1000);
     </script>
 
 </body>
-    </html>
+</html>
